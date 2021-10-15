@@ -1,4 +1,4 @@
-package com.example.auth.service;
+package com.auth.service;
 
 public class TokenServiceImpl {
 

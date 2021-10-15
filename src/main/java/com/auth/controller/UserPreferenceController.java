@@ -1,8 +1,8 @@
-package com.example.auth.controller;
+package com.auth.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SettingsController {
+public class UserPreferenceController {
 
 }

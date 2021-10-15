@@ -1,4 +1,4 @@
-package com.example.auth.config;
+package com.auth.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -13,21 +13,24 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/*SavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+		SavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		authenticationSuccessHandler.setTargetUrlParameter("redirectTo");
-		authenticationSuccessHandler.setDefaultTargetUrl("/");*/
+		authenticationSuccessHandler.setDefaultTargetUrl("/");
 		
-		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
-		
-		/*http.authorizeRequests().antMatchers("/assets/**").permitAll()
+		//http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
+		http.authorizeRequests().antMatchers("/assets/**").permitAll()
+								.antMatchers("/h2-console/**").permitAll()
 		                        .antMatchers("/login").permitAll()
 		                        .anyRequest().authenticated()
 		                        .and().formLogin().loginPage("/login")
 		                        .successHandler(authenticationSuccessHandler)
 		                        .and().logout().logoutUrl("/logout")
-		                        .and().httpBasic();
-		                        //.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-		                        //.ignoringAntMatchers("/instances");*/
+		                        .and().httpBasic()
+		                        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		                        .ignoringAntMatchers("/instances");
+		//http.csrf().disable();
+		http.headers().frameOptions().disable(); //sameOrigin();
+		
 		//super.configure(http);
 	}
 }
