@@ -1,7 +1,12 @@
 package com.auth.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -9,7 +14,15 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-public class Token {
+@Entity
+@Table
+//@SuppressWarnings("serial")
+public class Token implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -19,7 +32,7 @@ public class Token {
 	private String createdAt;
 
 	@CreatedBy
-	@Size(max = 100)
+	@Size(max = 50)
 	private String createdBy;
 
 	private String description;
@@ -29,7 +42,11 @@ public class Token {
 	private String lastModifiedAt;
 
 	@LastModifiedBy
+	@Size(max = 50)
 	private String lastModifiedBy;
 
 	private String token;
+	
+	@OneToOne
+	private TokenType tokenType;
 }

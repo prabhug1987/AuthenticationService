@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
@@ -18,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		authenticationSuccessHandler.setDefaultTargetUrl("/");
 		
 		//http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 		http.authorizeRequests().antMatchers("/assets/**").permitAll()
 								.antMatchers("/h2-console/**").permitAll()
 		                        .antMatchers("/login").permitAll()
@@ -27,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		                        .and().logout().logoutUrl("/logout")
 		                        .and().httpBasic()
 		                        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-		                        .ignoringAntMatchers("/instances");
+		                        .ignoringAntMatchers("/instances","/h2-console/**");
 		//http.csrf().disable();
 		http.headers().frameOptions().disable(); //sameOrigin();
 		
