@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * @author Prabhu G
@@ -16,6 +20,8 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table
+@Data
+@Builder
 public class PreferenceType implements Serializable{
 	
    /**
@@ -24,7 +30,7 @@ public class PreferenceType implements Serializable{
    private static final long serialVersionUID = -2060668637580467959L;
 
    @Id
-   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private int id;
    
    @Size(max = 50)

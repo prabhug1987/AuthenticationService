@@ -17,5 +17,10 @@ public class UserLogin implements Serializable {
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	private String userName;
+	
+	private long loggedInTime;
+	
 
 }

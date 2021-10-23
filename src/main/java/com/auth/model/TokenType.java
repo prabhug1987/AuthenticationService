@@ -2,14 +2,16 @@ package com.auth.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -22,24 +24,28 @@ public class TokenType implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "SEQ_TOKEN_TYPE")
 	private int id;
 
-	@CreationTimestamp
-	private String createdAt;
+	@Column(nullable = false)
+	private long createdAt;
 
 	@CreatedBy
+	@Column(nullable = false)
 	private String createdBy;
 
 	private String description;
 
+	@Min(value = 3)
 	@Max(value = 50)
 	private String name;
 
-	@UpdateTimestamp
-	private String updatedAt;
+	@Column(nullable = true, updatable = true)
+	private long updatedAt;
 
 	@LastModifiedBy
+	@Column(nullable = true, updatable = true)
 	private String updatedBy;
 
 	public TokenType() {
@@ -54,11 +60,11 @@ public class TokenType implements Serializable {
 		this.id = id;
 	}
 
-	public String getCreatedAt() {
+	public long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 

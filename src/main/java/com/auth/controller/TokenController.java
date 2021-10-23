@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auth.config.URLConfig;
 import com.auth.controller.request.TokenRequest;
 import com.auth.service.TokenService;
+import com.google.common.net.MediaType;
 
 @RestController
 @RequestMapping(URLConfig.TOKEN_CONTROLLER_PATH)
@@ -19,20 +20,21 @@ public class TokenController {
 	Logger logger = LoggerFactory.getLogger(TokenController.class);
 
 	@Autowired
-	private TokenService TokenServiceImpl;
+	private TokenService tokenServiceImpl;
 
 	@RequestMapping(method = RequestMethod.GET, value = URLConfig.CREATE_TOKEN_PATH)
 	@ResponseBody
 	public String createToken(@RequestBody TokenRequest request) {
 		logger.info("inside create token");
-		return "i";
+		tokenServiceImpl.createToken();
+		return "hello Prabhu";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = URLConfig.FIND_TOKEN_PATH)
 	@ResponseBody
 	public String findToken(@RequestBody TokenRequest request) {
 		logger.info("inside find token");
-		TokenServiceImpl.createToken();
+		tokenServiceImpl.findToken();
 		return "i";
 	}
 

@@ -9,8 +9,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import lombok.Builder;
+import lombok.Data;
+
 @Entity
 @Table
+@Data
+@Builder
+@SequenceGenerator(name = "SEQ_BROWSER_TYPE", sequenceName = "SEQ_BROWSER_TYPE", allocationSize = 1, initialValue = 1)
 public class BrowserType implements Serializable {
 	/**
 	 * 
@@ -18,7 +24,6 @@ public class BrowserType implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
-	@SequenceGenerator(name = "SEQ_BROWSER_TYPE", sequenceName = "SEQ_BROWSER_TYPE", allocationSize = 1, initialValue = 1)
 	private short id;
 
 	@Size(max = 50)

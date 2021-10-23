@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,14 +19,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table
 //@SuppressWarnings("serial")
 public class Token implements Serializable {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7811258479566369597L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 
 	@CreatedDate
@@ -46,7 +46,9 @@ public class Token implements Serializable {
 	private String lastModifiedBy;
 
 	private String token;
-	
+
 	@OneToOne
 	private TokenType tokenType;
+	
+	
 }
